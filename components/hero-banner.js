@@ -185,7 +185,7 @@ export default function BannerSlider() {
           {/* ------------ Banner ------------ */}
           <div className='mt-5 rounded-md mx-auto'>
             <div className='flex justify-between '>
-              <div className='pt-5 md:w-[22%]'>
+              <div className='pt-5 w-[25%] lg:w-[23%]'>
                 <Paper className='-translate-y-8'>
                   <MenuList sx={{ padding: 0 }}>
                     {[
@@ -230,7 +230,7 @@ export default function BannerSlider() {
                   </MenuList>
                 </Paper>
               </div>
-              <div className='w-[77%] '>
+              <div className='w-[74%] lg:w-[76%] '>
                 <div className='mb-[5px] lg:pl-1 xl:pl-0'>
                   <Slider {...webSettings}>
                     <div>

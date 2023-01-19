@@ -71,11 +71,7 @@ export default Navigation;
 // Mobile
 
 const MobileNavigation = (props) => {
-  return (
-    // <div className='h-[64px]'>
-    <MobileNav />
-    // </div>
-  );
+  return <MobileNav />;
 };
 
 class MenuButton extends Component {
@@ -100,7 +96,6 @@ class MenuButton extends Component {
   render() {
     const styles = {
       container: {
-        // minWidth: '32px',
         width: '100%',
         height: '100%',
         display: 'flex',
@@ -109,7 +104,6 @@ class MenuButton extends Component {
         alignItems: 'start',
         cursor: 'pointer',
         paddingRight: 7,
-        // padding: '4px',
       },
       line: {
         height: '2.2px',
@@ -160,6 +154,13 @@ class MobileNav extends Component {
     };
   }
 
+  handleSearchOpen() {
+    this.setState({ toggleSearch: true });
+  }
+  handleSearchClose() {
+    this.setState({ toggleSearch: false });
+  }
+
   handleMenuClick() {
     this.setState({ menuOpen: !this.state.menuOpen });
   }
@@ -171,9 +172,6 @@ class MobileNav extends Component {
   render() {
     const styles = {
       container: {
-        // position: 'fixed',
-        // top: 0,
-        // left: 0,
         height: '60px',
         zIndex: '99',
         display: 'flex',
@@ -183,8 +181,6 @@ class MobileNav extends Component {
         width: '100%',
         color: 'black',
         gap: '0.5rem',
-        // padding: '0 12px',
-        // paddingRight: '8px',
       },
       search: {
         margin: '0',
@@ -193,6 +189,7 @@ class MobileNav extends Component {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        position: 'relative',
       },
     };
 
@@ -213,15 +210,21 @@ class MobileNav extends Component {
             <EvalyLogo height={22} />
           </div>
           <div style={styles.search}>
-            <div className='w-full pl-3 flex items-center justify-end'>
+            <div className='w-full sm:pl-3 flex items-center justify-end'>
               <input
-                className='w-[90%] py-[4px] rounded-tl-md outline-none rounded-bl-md px-3 border border-black'
+                className='w-full py-[4px] rounded-tl-md outline-none rounded-bl-md px-3 border border-black'
                 type='text'
+                onBlur={() => {
+                  this.handleSearchClose();
+                }}
                 onFocus={() => {
-                  this.setState({ toggleSearch: true });
+                  this.handleSearchOpen();
                 }}
                 onChange={() => {
-                  this.setState({ toggleSearch: true });
+                  this.handleSearchOpen();
+                }}
+                onScroll={() => {
+                  this.handleSearchClose();
                 }}
                 placeholder='Search for ...'
               />
@@ -229,6 +232,13 @@ class MobileNav extends Component {
                 <AiOutlineSearch color='white' />
               </button>
             </div>
+            {this.state.toggleSearch && (
+              <SearchBar
+                onClose={() => {
+                  this.handleSearchClose();
+                }}
+              />
+            )}
           </div>
         </div>
         <div>
@@ -242,13 +252,6 @@ class MobileNav extends Component {
             <MobileDrawerContent />
           </Drawer>
         </div>
-        {/* {this.state.toggleSearch && (
-          <SearchBar
-            onClose={() => {
-              this.setState({ toggleSearch: false });
-            }}
-          />
-        )} */}
       </div>
     );
   }
@@ -328,6 +331,12 @@ const TabletNavigation = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [toggleSearch, setToggleSearch] = useState(false);
   const open = Boolean(anchorEl);
+  function handleSearchOpen() {
+    setToggleSearch(true);
+  }
+  function handleSearchClose() {
+    setToggleSearch(false);
+  }
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
     setToggle(true);
@@ -343,21 +352,22 @@ const TabletNavigation = (props) => {
         <div>
           <EvalyLogo height={25} />
         </div>
-        <div className='w-[60%] flex items-center'>
-          <input
-            className='w-[90%] py-[4px] rounded-tl-md outline-none rounded-bl-md px-3 sm:px-4 border border-black'
-            onFocus={() => {
-              setToggleSearch(true);
-            }}
-            onChange={() => {
-              setToggleSearch(true);
-            }}
-            type='text'
-            placeholder='Search for ...'
-          />
-          <button className='py-[9px] rounded-tr-md rounded-br-md px-5 bg-black'>
-            <AiOutlineSearch color='white' />
-          </button>
+        <div className='w-[60%] relative'>
+          <div className='flex items-center'>
+            <input
+              className='w-[90%] py-[4px] rounded-tl-md outline-none rounded-bl-md px-3 sm:px-4 border border-black'
+              onBlur={handleSearchClose}
+              onFocus={handleSearchOpen}
+              onChange={handleSearchOpen}
+              onScroll={handleSearchClose}
+              type='text'
+              placeholder='Search for ...'
+            />
+            <button className='py-[9px] rounded-tr-md rounded-br-md px-5 bg-black'>
+              <AiOutlineSearch color='white' />
+            </button>
+          </div>
+          {toggleSearch && <SearchBar onClose={handleSearchClose} />}
         </div>
         <div className='flex gap-2'>
           <IconButton
@@ -387,23 +397,25 @@ const TabletNavigation = (props) => {
         </div>
       </div>
       <div className='bg-[#040720] px-10 justify-between flex text-white h-12'>
-        <div className='flex items-center bg-red-700 px-5'>
+        <div className='flex items-center bg-red-700 px-5 w-[255px]'>
           <button
-            className='flex items-center gap-3'
+            className='w-full flex items-end justify-between gap-3'
             id='basic-button'
             aria-controls={open ? 'basic-menu' : undefined}
             aria-haspopup='true'
             aria-expanded={open ? 'true' : undefined}
             onClick={handleClick}
           >
-            <MenuButton
-              open={toggle}
-              onClick={() => {
-                setToggle(!toggle);
-              }}
-              color='white'
-            />
-            <p className={`${inriaSans.className} text-white`}>CATEGORIES</p>
+            <div className='flex items-center gap-1'>
+              <MenuButton
+                open={toggle}
+                onClick={() => {
+                  setToggle(!toggle);
+                }}
+                color='white'
+              />
+              <p className={`${inriaSans.className} text-white`}>CATEGORIES</p>
+            </div>
             <div className='ml-3'>
               {!toggle ? (
                 <KeyboardArrowRightIcon sx={{ color: '#fff' }} />
@@ -413,7 +425,7 @@ const TabletNavigation = (props) => {
             </div>
           </button>
           <Menu
-            sx={{ transform: 'translate(-21px,12px)' }}
+            sx={{ transform: 'translate(-21px,12px)', paddingTop: 0 }}
             id='basic-menu'
             anchorEl={anchorEl}
             open={open}
@@ -438,7 +450,7 @@ const TabletNavigation = (props) => {
                 <div key={item}>
                   <MenuItem
                     key={item}
-                    sx={{ width: 208 }}
+                    sx={{ width: 256 }}
                     onClick={handleClose}
                   >
                     <div
@@ -461,18 +473,7 @@ const TabletNavigation = (props) => {
           <li className='hover:text-gray-300 cursor-pointer'>Express</li>
           <li className='hover:text-gray-300 cursor-pointer'>T10</li>
         </ul>
-        {/* <IconButton className="translate-x-3"> */}
-        {/* <MoreVertOutlinedIcon sx={{ color: "#fff" }} /> */}
         <DotsTabletMenu />
-        {/* </IconButton> */}
-
-        {/* {toggleSearch && (
-          <SearchBar
-            onClose={() => {
-              setToggleSearch(false);
-            }}
-          />
-        )} */}
       </div>
     </>
   );
@@ -489,8 +490,11 @@ const WebNavigation = (props) => {
     setAnchorEl(event.currentTarget);
     setToggle(true);
   };
-  function handleToggleSearch() {
-    setToggleSearch((st) => !st);
+  function handleSearchOpen() {
+    setToggleSearch(true);
+  }
+  function handleSearchClose() {
+    setToggleSearch(false);
   }
   const handleClose = () => {
     setAnchorEl(null);
@@ -508,23 +512,23 @@ const WebNavigation = (props) => {
             <input
               className='w-[100%] py-[7px] rounded-tl-md outline-none rounded-bl-md px-3 border border-black'
               type='text'
-              onBlur={handleToggleSearch}
-              onFocus={handleToggleSearch}
-              onChange={handleToggleSearch}
-              onScroll={handleToggleSearch}
+              onBlur={handleSearchClose}
+              onFocus={handleSearchOpen}
+              onChange={handleSearchOpen}
+              onScroll={handleSearchClose}
               placeholder='Search for ...'
             />
             <button className='py-[12px] rounded-tr-md rounded-br-md px-8 bg-black'>
               <AiOutlineSearch color='white' />
             </button>
           </div>
-          {/* {toggleSearch && (
+          {toggleSearch && (
             <SearchBar
               onClose={() => {
                 setToggleSearch(false);
               }}
             />
-          )} */}
+          )}
         </div>
         <div className='flex gap-2 md:gap-3'>
           <IconButton
@@ -555,7 +559,7 @@ const WebNavigation = (props) => {
       </div>
       <div className='bg-[#040720]'>
         <div className='mx-auto max-w-7xl flex text-white h-12 px-10 xl:px-12'>
-          <div className='flex items-center bg-red-700 px-4 w-[22%]'>
+          <div className='flex items-center bg-red-700 px-4 w-[23%]'>
             <div
               className='flex items-center justify-between gap-3 w-full'
               id='basic-button'
@@ -583,13 +587,6 @@ const WebNavigation = (props) => {
             <li className='hover:text-gray-300 cursor-pointer mr-1'>Help</li>
           </ul>
         </div>
-        {/* {toggleSearch && (
-          <SearchBar
-            onClose={() => {
-              setToggleSearch(false);
-            }}
-          />
-        )} */}
       </div>
     </>
   );

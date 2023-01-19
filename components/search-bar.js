@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom';
 import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -26,12 +25,12 @@ function SearchBar(props) {
   });
 
   return (
-    <div className='border'>
+    <>
       <div onClick={onClose} />
-      <div className='absolute bg-[#fff] px-2'>
+      <div className='w-full sm:w-[97.74%] right-0 md:w-full border border-zinc-300 rounded-md absolute bg-[#fff] px-2 top-[47px] md:top-[35px] lg:top-[40px] '>
         <BasicTabs />
       </div>
-    </div>
+    </>
   );
 }
 
