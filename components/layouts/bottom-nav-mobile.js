@@ -31,20 +31,17 @@ export default function SimpleBottomNavigation() {
           }}
         >
           <BottomNavigationAction
-            label={<p className={inriaSans.className}>Cart</p>}
-            icon={<LocalMallOutlinedIcon />}
-          />
-          <BottomNavigationAction
             label={<p className={inriaSans.className}>Messages</p>}
             icon={<ChatBubbleOutlineOutlinedIcon />}
+          />
+          <BottomNavigationAction
+            label={<p className={inriaSans.className}>Account</p>}
+            icon={<AccountCircleOutlinedIcon />}
           />
           <BottomNavigationAction
             sx={{
               height: 0,
               padding: { xs: '5px' },
-              // '& img': {
-              //   marginRight: { xs: '-6px' },
-              // },
             }}
             label=''
             icon={<Logo />}
@@ -54,8 +51,8 @@ export default function SimpleBottomNavigation() {
             icon={<NotificationsNoneOutlinedIcon />}
           />
           <BottomNavigationAction
-            label={<p className={inriaSans.className}>Account</p>}
-            icon={<AccountCircleOutlinedIcon />}
+            label={<p className={inriaSans.className}>Cart</p>}
+            icon={<LocalMallOutlinedIcon />}
           />
         </BottomNavigation>
       </Box>
@@ -66,7 +63,7 @@ export default function SimpleBottomNavigation() {
 const Logo = () => {
   return (
     <Image
-      className='bg-red-200 border border-red-400 translate-y-3 p-2 rounded-full w-[48px] h-[48px] sm:w-[55px] h-[55px] mr-[-15px] sm:mr-[0px]'
+      className='logoImg bg-red-200 border border-red-400 translate-y-3 p-2 rounded-full w-[48px] h-[48px] sm:w-[55px] sm:h-[55px]'
       src={'/evaly-logo.png'}
       alt={'Logo'}
       width={40}

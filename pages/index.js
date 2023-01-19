@@ -112,12 +112,12 @@ export default function HomePage() {
               <h2 className='text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold'>
                 Shop by Brands
               </h2>
-              <div className='mt-3 shop-by-brands-section md:mt-5 grid sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 2xl:grid-cols-8 gap-3'>
+              <div className='mt-3 shop-by-brands-section md:mt-5 grid auto-rows-[1fr] sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 2xl:grid-cols-8 gap-3'>
                 {BRANDS.map((brand) => {
                   return (
                     <div
                       key={brand.title}
-                      className='flex flex-col justify-between items-center gap-2 bg-white rounded-md p-3 sm:p-4 shadow-sm'
+                      className='flex flex-col justify-between items-center bg-white rounded-md p-3 sm:p-4 shadow-sm'
                     >
                       <div>
                         <Image
@@ -128,7 +128,7 @@ export default function HomePage() {
                           height={150}
                         />
                       </div>
-                      <p className='textHideTwoLines text-center text-sm sm:text-md font-bold leading-4 sm:leading-5'>
+                      <p className='pt-2 textHideTwoLines text-center text-sm sm:text-md font-bold leading-4 sm:leading-5'>
                         {brand.title}
                       </p>
                     </div>

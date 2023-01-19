@@ -242,13 +242,13 @@ class MobileNav extends Component {
             <MobileDrawerContent />
           </Drawer>
         </div>
-        {this.state.toggleSearch && (
+        {/* {this.state.toggleSearch && (
           <SearchBar
             onClose={() => {
               this.setState({ toggleSearch: false });
             }}
           />
-        )}
+        )} */}
       </div>
     );
   }
@@ -438,7 +438,7 @@ const TabletNavigation = (props) => {
                 <div key={item}>
                   <MenuItem
                     key={item}
-                    sx={{ width: 224 }}
+                    sx={{ width: 208 }}
                     onClick={handleClose}
                   >
                     <div
@@ -465,13 +465,14 @@ const TabletNavigation = (props) => {
         {/* <MoreVertOutlinedIcon sx={{ color: "#fff" }} /> */}
         <DotsTabletMenu />
         {/* </IconButton> */}
-        {toggleSearch && (
+
+        {/* {toggleSearch && (
           <SearchBar
             onClose={() => {
               setToggleSearch(false);
             }}
           />
-        )}
+        )} */}
       </div>
     </>
   );
@@ -488,6 +489,9 @@ const WebNavigation = (props) => {
     setAnchorEl(event.currentTarget);
     setToggle(true);
   };
+  function handleToggleSearch() {
+    setToggleSearch((st) => !st);
+  }
   const handleClose = () => {
     setAnchorEl(null);
     setToggle(false);
@@ -499,21 +503,28 @@ const WebNavigation = (props) => {
         <div>
           <EvalyLogo height={25} />
         </div>
-        <div className='flex w-[65%] xl:w-[73%] items-center'>
-          <input
-            className='w-[100%] py-[7px] rounded-tl-md outline-none rounded-bl-md px-3 border border-black'
-            type='text'
-            onFocus={() => {
-              setToggleSearch(true);
-            }}
-            onChange={() => {
-              setToggleSearch(true);
-            }}
-            placeholder='Search for ...'
-          />
-          <button className='py-[12px] rounded-tr-md rounded-br-md px-8 bg-black'>
-            <AiOutlineSearch color='white' />
-          </button>
+        <div className='relative w-full w-[65%] xl:w-[73%] '>
+          <div className='flex items-center'>
+            <input
+              className='w-[100%] py-[7px] rounded-tl-md outline-none rounded-bl-md px-3 border border-black'
+              type='text'
+              onBlur={handleToggleSearch}
+              onFocus={handleToggleSearch}
+              onChange={handleToggleSearch}
+              onScroll={handleToggleSearch}
+              placeholder='Search for ...'
+            />
+            <button className='py-[12px] rounded-tr-md rounded-br-md px-8 bg-black'>
+              <AiOutlineSearch color='white' />
+            </button>
+          </div>
+          {/* {toggleSearch && (
+            <SearchBar
+              onClose={() => {
+                setToggleSearch(false);
+              }}
+            />
+          )} */}
         </div>
         <div className='flex gap-2 md:gap-3'>
           <IconButton
@@ -572,13 +583,13 @@ const WebNavigation = (props) => {
             <li className='hover:text-gray-300 cursor-pointer mr-1'>Help</li>
           </ul>
         </div>
-        {toggleSearch && (
+        {/* {toggleSearch && (
           <SearchBar
             onClose={() => {
               setToggleSearch(false);
             }}
           />
-        )}
+        )} */}
       </div>
     </>
   );
@@ -587,7 +598,7 @@ const WebNavigation = (props) => {
 const ContactNavigation = () => {
   return (
     <div className='bg-[#f7f8fb]'>
-      <div className='flex items-center max-w-7xl mx-auto justify-between h-10 md:h-12 px-5 px-10 xl:px-12'>
+      <div className='flex items-center max-w-7xl mx-auto justify-between h-10 md:h-12 px-4 md:px-10 xl:px-12'>
         <div className='flex items-center justify-between gap-8'>
           <div className='flex items-center gap-2' aria-haspopup='true'>
             <PhoneInTalkOutlinedIcon

@@ -106,6 +106,8 @@ li.thumb {
 
 .shop-by-brands-section > * {
   word-break: break-word;
+  grid-auto-rows: 1fr;
+  margin: '0 auto';
 }
 
 .textHideTwoLines {
@@ -125,7 +127,7 @@ li.thumb {
 
 @media (min-width: 341px) and (max-width: 496px) {
   .shop-by-brands-section {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px !important;
   }
   .travel-tour-section {
@@ -282,9 +284,9 @@ li.thumb {
   }
 }
 
-@media (min-width: 912px) and (max-width: 1000px) {
+@media (min-width: 912px) and (max-width: 1024px) {
   .travel-tour-section {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 14px !important;
   }
 
@@ -294,11 +296,11 @@ li.thumb {
     width: 100% !important;
   }
 }
-
+/* 
 @media (min-width: 1000px) and (max-width: 1024px) {
   .travel-tour-section {
-    grid-template-columns: repeat(5, 1fr);
-    /* row-gap: 14px !important; */
+    grid-template-columns: repeat(4, 1fr);
+
     gap: 14px !important;
   }
 
@@ -307,12 +309,11 @@ li.thumb {
     height: 120px !important;
     width: 100% !important;
   }
-}
+} */
 
-@media (min-width: 1024px) and (max-width: 1280px) {
+/* @media (min-width: 1024px) and (max-width: 1280px) {
   .travel-tour-section {
-    grid-template-columns: repeat(5, 1fr);
-    /* row-gap: 14px !important; */
+    grid-template-columns: repeat(4, 1fr);
     gap: 15px !important;
   }
   .destination-card div img {
@@ -323,9 +324,9 @@ li.thumb {
   .title {
     margin-top: 18px !important;
   }
-}
+} */
 
-@media (min-width: 1280px) and (max-width: 1366px) {
+@media (min-width: 1024px) and (max-width: 1440px) {
   .travel-tour-section {
     grid-template-columns: repeat(5, 1fr);
     row-gap: 15px !important;
@@ -338,7 +339,7 @@ li.thumb {
   }
 }
 
-@media (min-width: 1366px) {
+@media (min-width: 1440px) {
   .travel-tour-section {
     grid-template-columns: repeat(6, 1fr);
     row-gap: 15px !important;
@@ -387,14 +388,18 @@ li.thumb {
 }
 
 @media screen and (max-width: 380px) {
-  /* .bottomNavigation {
+  .bottomNavigation {
     justify-content: space-between;
-  } */
+    padding-inline: 5px;
+  }
   .bottomNavigation button {
     padding: 5px !important;
     min-width: fit-content;
     flex: 0 !important;
   }
+  /* .bottomNavigation button .logoImg {
+    margin-left: 10px;
+  } */
   /* .MuiButtonBase-root.MuiBottomNavigationAction-root.css-1bjk3jo-MuiButtonBase-root-MuiBottomNavigationAction-root {
     padding: 5px !important;
     min-width: fit-content;
@@ -418,7 +423,7 @@ rect {
 
 .modal {
   position: fixed;
-  top: 312px !important;
+  top: 304px;
   left: 52%;
   border: 1px solid rgba(190, 190, 190, 0.509);
   height: 512px;
@@ -434,20 +439,29 @@ rect {
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 
-@media screen and (min-width: 480px) {
+@media (min-width: 480px) and (max-width: 768px) {
   .modal {
-    width: 48% !important;
-    top: 323px !important;
-    left: 43%;
+    width: 72% !important;
+    top: 349px !important;
+    left: 61% !important;
+    height: 523px !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .modal {
+    width: 55% !important;
+    top: 359px !important;
+    left: calc(50% - 40px) !important;
     height: 523px !important;
   }
 }
 
 @media screen and (min-width: 1024px) {
   .modal {
-    top: 324px !important;
-    width: 35% !important;
-    left: 50% !important;
+    top: 360px;
+    width: 60%;
+    left: calc(50% - 60px) !important;
+    max-width: 865px !important;
   }
 }
 

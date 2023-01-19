@@ -109,7 +109,7 @@ export default function Footer() {
               Download
             </span>
 
-            <div className='flex items-center gap-4 mt-8 w-fit'>
+            <div className='flex flex-col sm:flex-row items-center gap-4 mt-8 w-fit'>
               <div className='flex items-center border w-[155px] rounded-lg px-3 py-2  bg-black'>
                 <img
                   src='https://cdn-icons-png.flaticon.com/512/888/888857.png'

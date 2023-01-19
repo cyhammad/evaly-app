@@ -25,14 +25,13 @@ function SearchBar(props) {
     });
   });
 
-  return ReactDOM.createPortal(
-    <>
-      <div onClick={onClose} className='overlay' />
-      <div className='modal px-2 md:top-[25%] md:w-[40%]'>
+  return (
+    <div className='border'>
+      <div onClick={onClose} />
+      <div className='absolute bg-[#fff] px-2'>
         <BasicTabs />
       </div>
-    </>,
-    document.getElementById('overlays')
+    </div>
   );
 }
 
