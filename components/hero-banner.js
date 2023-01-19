@@ -204,9 +204,8 @@ export default function BannerSlider() {
                         <div key={item}>
                           <MenuItem
                             key={item}
-                            className='w-[216px] md:w-full'
+                            className='w-full'
                             sx={{
-                              width: '216px',
                               paddingTop: '12px',
                               paddingBottom: '12px',
                             }}

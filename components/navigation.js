@@ -438,7 +438,7 @@ const TabletNavigation = (props) => {
                 <div key={item}>
                   <MenuItem
                     key={item}
-                    sx={{ width: 210 }}
+                    sx={{ width: 224 }}
                     onClick={handleClose}
                   >
                     <div
@@ -587,7 +587,7 @@ const WebNavigation = (props) => {
 const ContactNavigation = () => {
   return (
     <div className='bg-[#f7f8fb]'>
-      <div className='flex items-center max-w-7xl mx-auto justify-between h-10 md:h-12 px-5 md:px-10'>
+      <div className='flex items-center max-w-7xl mx-auto justify-between h-10 md:h-12 px-5 px-10 xl:px-12'>
         <div className='flex items-center justify-between gap-8'>
           <div className='flex items-center gap-2' aria-haspopup='true'>
             <PhoneInTalkOutlinedIcon

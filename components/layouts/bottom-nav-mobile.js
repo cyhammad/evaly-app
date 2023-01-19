@@ -24,6 +24,7 @@ export default function SimpleBottomNavigation() {
       <Box sx={{ width: '100%' }}>
         <BottomNavigation
           showLabels
+          className='bottomNavigation'
           value={value}
           onChange={(event, newValue) => {
             setValue(newValue);
