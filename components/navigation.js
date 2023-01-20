@@ -1,5 +1,5 @@
 import { Inria_Sans } from '@next/font/google';
-import { Component, useState } from 'react';
+import React, { Component, useState } from 'react';
 import dynamic from 'next/dynamic';
 import PhoneInTalkOutlinedIcon from '@mui/icons-material/PhoneInTalkOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
@@ -425,7 +425,7 @@ const TabletNavigation = (props) => {
             </div>
           </button>
           <Menu
-            sx={{ transform: 'translate(-21px,12px)', paddingTop: 0 }}
+            className='MenuList borderRadTopZero translate-x-[-20px] translate-y-[11px] p-0'
             id='basic-menu'
             anchorEl={anchorEl}
             open={open}
@@ -447,10 +447,11 @@ const TabletNavigation = (props) => {
               'Split AC',
             ].map((item, i, arr) => {
               return (
-                <div key={item}>
+                <React.Fragment key={item}>
                   <MenuItem
+                    className='w-[255px] h-full py-3'
                     key={item}
-                    sx={{ width: 256 }}
+                    // sx={{ width: 255, height: '100%' }}
                     onClick={handleClose}
                   >
                     <div
@@ -460,8 +461,10 @@ const TabletNavigation = (props) => {
                       <KeyboardArrowRightIcon sx={{ height: 17 }} />
                     </div>
                   </MenuItem>
-                  {!(i === arr.length - 1) && <Divider />}
-                </div>
+                  {!(i === arr.length - 1) && (
+                    <hr className='border-gray-300' />
+                  )}
+                </React.Fragment>
               );
             })}
           </Menu>

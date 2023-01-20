@@ -384,7 +384,7 @@ li.thumb {
 }
 
 .bottomNavigation .Mui-selected {
-  color: black !important;
+  color: #b91c1c !important;
 }
 
 @media screen and (max-width: 380px) {
@@ -395,7 +395,7 @@ li.thumb {
   .bottomNavigation button {
     padding: 5px !important;
     min-width: fit-content;
-    flex: 0 !important;
+    /* flex: 0 !important; */
   }
   /* .bottomNavigation button .logoImg {
     margin-left: 10px;
@@ -511,4 +511,13 @@ footer {
 
 hr {
   border-top: 1px solid #0407209e;
+}
+
+.borderRadTopZero .MuiPaper-root {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+.MenuList .MuiList-root {
+  padding-block: 0;
 }

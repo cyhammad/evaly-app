@@ -4,12 +4,13 @@ import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { EvalyLogo } from '../icons/logo';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
-import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
-import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import HouseOutlinedIcon from '@mui/icons-material/HouseOutlined';
+import EmojiEventsOutlinedIcon from '@mui/icons-material/EmojiEventsOutlined';
 import Image from 'next/image';
 
 import { Inria_Sans } from '@next/font/google';
+import { Badge, styled } from '@mui/material';
 
 const inriaSans = Inria_Sans({
   subsets: ['latin'],
@@ -17,7 +18,7 @@ const inriaSans = Inria_Sans({
 });
 
 export default function SimpleBottomNavigation() {
-  const [value, setValue] = React.useState(2);
+  const [value, setValue] = React.useState(0);
 
   return (
     <div className='md:hidden fixed bottom-0 left-0 right-0'>
@@ -31,12 +32,12 @@ export default function SimpleBottomNavigation() {
           }}
         >
           <BottomNavigationAction
-            label={<p className={inriaSans.className}>Messages</p>}
-            icon={<ChatBubbleOutlineOutlinedIcon />}
+            label={<p className={inriaSans.className}>Home</p>}
+            icon={<HouseOutlinedIcon />}
           />
           <BottomNavigationAction
-            label={<p className={inriaSans.className}>Account</p>}
-            icon={<AccountCircleOutlinedIcon />}
+            label={<p className={inriaSans.className}>Campaigns</p>}
+            icon={<EmojiEventsOutlinedIcon />}
           />
           <BottomNavigationAction
             sx={{
@@ -47,12 +48,16 @@ export default function SimpleBottomNavigation() {
             icon={<Logo />}
           />
           <BottomNavigationAction
-            label={<p className={inriaSans.className}>Notifications</p>}
-            icon={<NotificationsNoneOutlinedIcon />}
+            label={<p className={inriaSans.className}>Cart</p>}
+            icon={
+              <BadgeExt badgeContent='0' badgeColor='#b91c1c'>
+                <ShoppingCartIcon />
+              </BadgeExt>
+            }
           />
           <BottomNavigationAction
-            label={<p className={inriaSans.className}>Cart</p>}
-            icon={<LocalMallOutlinedIcon />}
+            label={<p className={inriaSans.className}>Account</p>}
+            icon={<AccountCircleOutlinedIcon />}
           />
         </BottomNavigation>
       </Box>
@@ -63,7 +68,7 @@ export default function SimpleBottomNavigation() {
 const Logo = () => {
   return (
     <Image
-      className='logoImg bg-red-200 border border-red-400 translate-y-3 p-2 rounded-full w-[48px] h-[48px] sm:w-[55px] sm:h-[55px]'
+      className='bg-red-200 border border-red-400 translate-y-3 p-2 rounded-full w-[48px] h-[48px] sm:w-[55px] sm:h-[55px]'
       src={'/evaly-logo.png'}
       alt={'Logo'}
       width={40}
@@ -71,3 +76,10 @@ const Logo = () => {
     />
   );
 };
+
+const BadgeExt = styled(Badge)(({ badgeColor }) => ({
+  '& .MuiBadge-badge': {
+    backgroundColor: badgeColor,
+    color: '#fff',
+  },
+}));

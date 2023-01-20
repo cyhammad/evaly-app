@@ -186,8 +186,8 @@ export default function BannerSlider() {
           <div className='mt-5 rounded-md mx-auto'>
             <div className='flex justify-between '>
               <div className='pt-5 w-[25%] lg:w-[23%]'>
-                <Paper className='-translate-y-8'>
-                  <MenuList sx={{ padding: 0 }}>
+                <Paper className='rounded-t-none -translate-y-8'>
+                  <MenuList className='p-0'>
                     {[
                       'Desktop',
                       'Laptop',
@@ -202,14 +202,7 @@ export default function BannerSlider() {
                     ].map((item, i, arr) => {
                       return (
                         <div key={item}>
-                          <MenuItem
-                            key={item}
-                            className='w-full'
-                            sx={{
-                              paddingTop: '12px',
-                              paddingBottom: '12px',
-                            }}
-                          >
+                          <MenuItem key={item} className='w-full py-3'>
                             <div
                               className={`${inria_sans.className} flex items-center justify-between w-full`}
                             >
