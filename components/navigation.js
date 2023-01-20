@@ -451,7 +451,6 @@ const TabletNavigation = (props) => {
                   <MenuItem
                     className='w-[255px] h-full py-3'
                     key={item}
-                    // sx={{ width: 255, height: '100%' }}
                     onClick={handleClose}
                   >
                     <div
