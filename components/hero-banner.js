@@ -187,7 +187,7 @@ export default function BannerSlider() {
             <div className='flex justify-between '>
               <div className='pt-5 w-[25%] lg:w-[23%]'>
                 <Paper className='rounded-t-none -translate-y-8'>
-                  <MenuList className='p-0'>
+                  <MenuList sx={{ paddingBlock: 0 }}>
                     {[
                       'Desktop',
                       'Laptop',
