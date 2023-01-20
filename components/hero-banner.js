@@ -202,7 +202,14 @@ export default function BannerSlider() {
                     ].map((item, i, arr) => {
                       return (
                         <div key={item}>
-                          <MenuItem key={item} className='w-full py-3'>
+                          <MenuItem
+                            key={item}
+                            className='w-full'
+                            sx={{
+                              paddingTop: '12px',
+                              paddingBottom: '12px',
+                            }}
+                          >
                             <div
                               className={`${inria_sans.className} flex items-center justify-between w-full`}
                             >

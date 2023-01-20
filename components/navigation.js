@@ -449,7 +449,11 @@ const TabletNavigation = (props) => {
               return (
                 <React.Fragment key={item}>
                   <MenuItem
-                    className='w-[255px] h-full py-3'
+                    className='w-[255px] h-full'
+                    sx={{
+                      paddingTop: '12px',
+                      paddingBottom: '12px',
+                    }}
                     key={item}
                     onClick={handleClose}
                   >
