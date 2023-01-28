@@ -1,5 +1,5 @@
 import { Inria_Sans } from '@next/font/google';
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import PhoneInTalkOutlinedIcon from '@mui/icons-material/PhoneInTalkOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
@@ -24,7 +24,12 @@ import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumb
 import MenuIcon from '@mui/icons-material/Menu';
 import { EvalyLogo } from './icons/logo';
 
+import PersonIcon from '@mui/icons-material/Person';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import HomeIcon from '@mui/icons-material/Home';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import {
+  Badge,
   Divider,
   Drawer,
   IconButton,
@@ -34,6 +39,7 @@ import {
   ListItemIcon,
   Menu,
   MenuItem,
+  styled,
 } from '@mui/material';
 import CustomizedMenus from './ui/options-menu';
 
@@ -43,6 +49,10 @@ const inriaSans = Inria_Sans({
 });
 
 import SearchBar from './search-bar';
+import CartMenuWeb from './cart/CartMenuWeb';
+import NavbarButtonsMain from './navbarButtonsMain';
+import CategoriesMenu from './common/CategoriesMenu';
+import MenuButton from './common/MenuButton';
 
 const Navigation = (props) => {
   return (
@@ -73,77 +83,6 @@ export default Navigation;
 const MobileNavigation = (props) => {
   return <MobileNav />;
 };
-
-class MenuButton extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: this.props.open ? this.props.open : false,
-      color: this.props.color ? this.props.color : 'black',
-    };
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.open !== this.state.open) {
-      this.setState({ open: nextProps.open });
-    }
-  }
-
-  handleClick() {
-    this.setState({ open: !this.state.open });
-  }
-
-  render() {
-    const styles = {
-      container: {
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'start',
-        cursor: 'pointer',
-        paddingRight: 7,
-      },
-      line: {
-        height: '2.2px',
-        width: '17px',
-        background: this.state.color,
-        transition: 'all 0.2s ease',
-      },
-      lineTop: {
-        transform: this.state.open ? 'rotate(45deg)' : 'none',
-        transformOrigin: 'top left',
-        marginBottom: '4px',
-      },
-      lineMiddle: {
-        opacity: this.state.open ? 0 : 1,
-        transform: this.state.open ? 'translateX(-16px)' : 'none',
-      },
-      lineBottom: {
-        transform: this.state.open ? 'translateX(-2px) rotate(-45deg)' : 'none',
-        transformOrigin: 'top left',
-        marginTop: '4px',
-      },
-    };
-    return (
-      <div
-        style={styles.container}
-        onClick={
-          this.props.onClick
-            ? this.props.onClick
-            : () => {
-                this.handleClick();
-              }
-        }
-      >
-        <div style={{ ...styles.line, ...styles.lineTop }} />
-        <div style={{ ...styles.line, ...styles.lineMiddle }} />
-        <div style={{ ...styles.line, ...styles.lineBottom }} />
-      </div>
-    );
-  }
-}
 
 class MobileNav extends Component {
   constructor(props) {
@@ -369,36 +308,11 @@ const TabletNavigation = (props) => {
           </div>
           {toggleSearch && <SearchBar onClose={handleSearchClose} />}
         </div>
-        <div className='flex gap-2'>
-          <IconButton
-            sx={{ border: '1px solid #ccc' }}
-            className='border border-[#ccc] rounded-full shadow-md'
-          >
-            <BsBucket className='h-4 w-4' />
-          </IconButton>
-          <IconButton
-            sx={{ border: '1px solid #ccc' }}
-            className='border border-[#ccc] rounded-full shadow-md'
-          >
-            <IoMdNotificationsOutline className='h-4 w-4' />
-          </IconButton>
-          <IconButton
-            sx={{ border: '1px solid #ccc' }}
-            className='border border-[#ccc] rounded-full shadow-md'
-          >
-            <HiOutlineChatBubbleLeft className='h-4 w-4' />
-          </IconButton>
-          <IconButton
-            sx={{ border: '1px solid #ccc' }}
-            className='border border-[#ccc] rounded-full shadow-md'
-          >
-            <AiOutlineUser className='h-4 w-4' />
-          </IconButton>
-        </div>
+        <NavbarButtonsMain size='sm' />
       </div>
       <div className='bg-[#040720] px-10 justify-between flex text-white h-12'>
         <div className='flex items-center bg-red-700 px-5 w-[255px]'>
-          <button
+          {/* <button
             className='w-full flex items-end justify-between gap-3'
             id='basic-button'
             aria-controls={open ? 'basic-menu' : undefined}
@@ -470,7 +384,8 @@ const TabletNavigation = (props) => {
                 </React.Fragment>
               );
             })}
-          </Menu>
+          </Menu> */}
+          <CategoriesMenu type='normal' />
         </div>
         <ul className='flex-1 flex justify-evenly items-center'>
           <li className='hover:text-gray-300 cursor-pointer'>All Shops</li>
@@ -491,7 +406,24 @@ const WebNavigation = (props) => {
   const [toggle, setToggle] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [toggleSearch, setToggleSearch] = useState(false);
+  const [visible, setVisible] = useState(false);
   const open = Boolean(anchorEl);
+
+  const ref = useRef(null);
+
+  useEffect(() => {
+    function handleScroll() {
+      if (window.scrollY > 500) {
+        setVisible(true);
+      } else {
+        setVisible(false);
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
     setToggle(true);
@@ -536,47 +468,28 @@ const WebNavigation = (props) => {
             />
           )}
         </div>
-        <div className='flex gap-2 md:gap-3'>
-          <IconButton
-            sx={{ border: '1px solid #ccc' }}
-            className='border border-[#ccc] rounded-full shadow-md'
-          >
-            <BsBucket className='h-5 w-5' />
-          </IconButton>
-          <IconButton
-            sx={{ border: '1px solid #ccc' }}
-            className='border border-[#ccc] rounded-full shadow-md'
-          >
-            <IoMdNotificationsOutline className='h-5 w-5' />
-          </IconButton>
-          <IconButton
-            sx={{ border: '1px solid #ccc' }}
-            className='border border-[#ccc] rounded-full shadow-md'
-          >
-            <HiOutlineChatBubbleLeft className='h-5 w-5' />
-          </IconButton>
-          <IconButton
-            sx={{ border: '1px solid #ccc' }}
-            className='border border-[#ccc] rounded-full shadow-md'
-          >
-            <AiOutlineUser className='h-5 w-5' />
-          </IconButton>
-        </div>
+        <NavbarButtonsMain size='md' />
       </div>
       <div className='bg-[#040720]'>
         <div className='mx-auto max-w-7xl flex text-white h-12 px-10 xl:px-12'>
-          <div className='flex items-center bg-red-700 px-4 w-[23%]'>
-            <div
-              className='flex items-center justify-between gap-3 w-full'
-              id='basic-button'
-              aria-haspopup='true'
-            >
-              <MenuIcon color='white' />
-              <p className={`${inriaSans.className} text-white`}>CATEGORIES</p>
-              <div className='ml-3'>
+          <div ref={ref} className='flex items-center bg-red-700 px-4 w-[23%]'>
+            {!visible ? (
+              <div
+                className='flex items-center justify-between gap-3 w-full'
+                id='basic-button'
+                aria-haspopup='true'
+              >
+                <MenuIcon color='white' />
+                <p className={`${inriaSans.className} text-white`}>
+                  CATEGORIES
+                </p>
+                {/* <div className='ml-3'> */}
                 <KeyboardArrowDownIcon sx={{ color: '#fff' }} />
+                {/* </div> */}
               </div>
-            </div>
+            ) : (
+              <CategoriesMenu ref={ref} type='toggle' />
+            )}
           </div>
           <ul className='flex-1 gap-6 xl:gap-14  flex items-center px-4'>
             <li className='hover:text-gray-300 cursor-pointer'>All Shops</li>
@@ -594,6 +507,7 @@ const WebNavigation = (props) => {
           </ul>
         </div>
       </div>
+      <CartMenuWeb open={open} anchorEl={anchorEl} toggleMenu={handleClose} />
     </>
   );
 };
@@ -630,3 +544,12 @@ const ContactNavigation = () => {
     </div>
   );
 };
+
+const BadgeExt = styled(Badge, {
+  shouldForwardProp: (props) => props !== 'badgeColor',
+})(({ badgeColor }) => ({
+  '& .MuiBadge-badge': {
+    backgroundColor: badgeColor,
+    color: '#fff',
+  },
+}));

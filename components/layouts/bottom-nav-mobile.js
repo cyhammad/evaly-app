@@ -77,7 +77,9 @@ const Logo = () => {
   );
 };
 
-const BadgeExt = styled(Badge)(({ badgeColor }) => ({
+const BadgeExt = styled(Badge, {
+  shouldForwardProp: (props) => props !== 'badgeColor',
+})(({ badgeColor }) => ({
   '& .MuiBadge-badge': {
     backgroundColor: badgeColor,
     color: '#fff',
