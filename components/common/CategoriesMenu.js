@@ -24,6 +24,17 @@ const CategoriesMenu = React.forwardRef((props, ref) => {
     setToggle(false);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setAnchorEl(null);
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [anchorEl]);
+
   return (
     <>
       <button
@@ -65,6 +76,7 @@ const CategoriesMenu = React.forwardRef((props, ref) => {
         id='basic-menu'
         anchorEl={anchorEl}
         open={open}
+        disableScrollLock={true}
         onClose={handleClose}
         MenuListProps={{
           'aria-labelledby': 'basic-button',

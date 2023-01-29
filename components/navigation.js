@@ -419,7 +419,6 @@ const WebNavigation = (props) => {
         setVisible(false);
       }
     }
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);

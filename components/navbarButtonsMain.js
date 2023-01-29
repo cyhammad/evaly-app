@@ -1,12 +1,12 @@
-import { IconButton } from '@mui/material';
-import React from 'react';
-import Badge from './badge';
-import CartMenuWeb from './cart/CartMenuWeb';
+import { IconButton } from "@mui/material";
+import React, { useEffect } from "react";
+import Badge from "./badge";
+import CartMenuWeb from "./cart/CartMenuWeb";
 
-import PersonIcon from '@mui/icons-material/Person';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import HomeIcon from '@mui/icons-material/Home';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import PersonIcon from "@mui/icons-material/Person";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import HomeIcon from "@mui/icons-material/Home";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 
 const NavbarButtonsMain = ({ size }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -17,41 +17,50 @@ const NavbarButtonsMain = ({ size }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  useEffect(() => {
+    const handleScroll = () => {
+      setAnchorEl(null);
+    };
+    window.addEventListener("scroll", handleScroll);
 
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [anchorEl]);
   return (
     <React.Fragment>
-      <div className='flex gap-2 md:gap-3'>
+      <div className="flex gap-2 md:gap-3">
         <IconButton
-          sx={{ border: '1px solid #ccc' }}
-          className='border border-[#ccc] rounded-full shadow-md'
-          aria-describedby='cart-button'
+          sx={{ border: "1px solid #ccc" }}
+          className="border border-[#ccc] rounded-full shadow-md"
+          aria-describedby="cart-button"
           onClick={handleClick}
         >
           <Badge number={0}>
             <ShoppingCartIcon
-              className={`${size === 'sm' ? 'h-4 w-4' : 'h-5 w-5'}`}
+              className={`${size === "sm" ? "h-4 w-4" : "h-5 w-5"}`}
             />
           </Badge>
         </IconButton>
         <IconButton
-          sx={{ border: '1px solid #ccc' }}
-          className='border border-[#ccc] rounded-full shadow-md'
+          sx={{ border: "1px solid #ccc" }}
+          className="border border-[#ccc] rounded-full shadow-md"
         >
-          <HomeIcon className={`${size === 'sm' ? 'h-4 w-4' : 'h-5 w-5'}`} />
+          <HomeIcon className={`${size === "sm" ? "h-4 w-4" : "h-5 w-5"}`} />
         </IconButton>
         <IconButton
-          sx={{ border: '1px solid #ccc' }}
-          className='border border-[#ccc] rounded-full shadow-md'
+          sx={{ border: "1px solid #ccc" }}
+          className="border border-[#ccc] rounded-full shadow-md"
         >
           <EmojiEventsIcon
-            className={`${size === 'sm' ? 'h-4 w-4' : 'h-5 w-5'}`}
+            className={`${size === "sm" ? "h-4 w-4" : "h-5 w-5"}`}
           />
         </IconButton>
         <IconButton
-          sx={{ border: '1px solid #ccc' }}
-          className='border border-[#ccc] rounded-full shadow-md'
+          sx={{ border: "1px solid #ccc" }}
+          className="border border-[#ccc] rounded-full shadow-md"
         >
-          <PersonIcon className={`${size === 'sm' ? 'h-4 w-4' : 'h-5 w-5'}`} />
+          <PersonIcon className={`${size === "sm" ? "h-4 w-4" : "h-5 w-5"}`} />
         </IconButton>
       </div>
       <CartMenuWeb open={open} toggleMenu={handleClose} anchorEl={anchorEl} />
