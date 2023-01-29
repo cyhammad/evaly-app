@@ -6,7 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch } from 'react-redux';
 import { removeItem } from '../../store/cartSlice';
 
-const CardItem = ({ prod, price, quantity, img }) => {
+const CardItem = ({ id, prod, price, quantity, img }) => {
   const dispatch = useDispatch();
   const handleItemClick = () => {
     dispatch(removeItem(id));
