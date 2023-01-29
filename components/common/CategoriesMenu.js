@@ -27,6 +27,7 @@ const CategoriesMenu = React.forwardRef((props, ref) => {
   useEffect(() => {
     const handleScroll = () => {
       setAnchorEl(null);
+      setToggle(false);
     };
     window.addEventListener("scroll", handleScroll);
 

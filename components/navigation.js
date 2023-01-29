@@ -53,6 +53,7 @@ import CartMenuWeb from './cart/CartMenuWeb';
 import NavbarButtonsMain from './navbarButtonsMain';
 import CategoriesMenu from './common/CategoriesMenu';
 import MenuButton from './common/MenuButton';
+import { useSelector } from 'react-redux';
 
 const Navigation = (props) => {
   return (
@@ -408,7 +409,6 @@ const WebNavigation = (props) => {
   const [toggleSearch, setToggleSearch] = useState(false);
   const [visible, setVisible] = useState(false);
   const open = Boolean(anchorEl);
-
   const ref = useRef(null);
 
   useEffect(() => {

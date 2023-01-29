@@ -4,8 +4,22 @@ import Button from "../Button";
 import MenuPopover from "../MenuPopover";
 import CartItem from "./CardItem";
 import MenuAnchor from "../MenuAnchor";
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const CartMenuWeb = ({ open, toggleMenu, anchorEl }) => {
+  const cart = useSelector((state) => state.cart);
+  const [totalItems, setTotalItems] = useState(0);
+
+  useEffect(() => {
+    console.log("CART:", cart);
+    let total = 0;
+    cart.forEach((item) => {
+      total += item.quantity;
+    });
+    setTotalItems(total);
+  }, [cart]);
   return (
     <>
       {/* <MenuPopover
@@ -122,30 +136,14 @@ const CartMenuWeb = ({ open, toggleMenu, anchorEl }) => {
             width="350px"
             maxHeight="400"
           >
-            <CartItem
-              prod="Samgsung Galaxy Note 8"
-              price="1022"
-              quantity="1"
-              img="/order/product.jpg"
-            />
-            <CartItem
-              prod="Samgsung Galaxy Note 8"
-              price="1022"
-              quantity="1"
-              img="/order/product.jpg"
-            />
-            <CartItem
-              prod="Samgsung Galaxy Note 8"
-              price="1022"
-              quantity="1"
-              img="/order/product.jpg"
-            />
-            <CartItem
-              prod="Samgsung Galaxy Note 8"
-              price="1022"
-              quantity="1"
-              img="/order/product.jpg"
-            />
+            {cart.map((item) => (
+              <CartItem
+                prod={item.title}
+                price={item.price}
+                quantity={item.quantity}
+                img={item.image}
+              />
+            ))}
           </Box>
           <div className="px-4 py-4  border-t border-slate-200">
             <Button className="w-full" color="bg-black" title="Checkout" />
