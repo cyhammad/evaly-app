@@ -43,6 +43,15 @@ var smallSettings = {
         slidesToScroll: 1,
       },
     },
+    {
+      breakpoint: 375,
+      settings: {
+        autoplay: false,
+        infinite: false,
+        slidesToShow: 1.2,
+        slidesToScroll: 1,
+      },
+    },
   ],
 };
 

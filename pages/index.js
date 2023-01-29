@@ -5,13 +5,14 @@ import { HeroBannerSlider } from '../components';
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import Button from '../components/Button';
-import { Avatar } from '@mui/material';
+import { Avatar, IconButton } from '@mui/material';
 
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../store/cartSlice';
 import { inriaSans } from '../components/utils/getinriaFont';
 import React from 'react';
-
+import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from 'react-toastify';
 // Dummy Data
 
 const BRANDS = [
@@ -96,6 +97,30 @@ const TOUR_DESTINATIONS = [
 
 export default function HomePage() {
   const dispatch = useDispatch();
+  const showItemAddedToast = () => {
+    toast('Item added to cart', {
+      position: 'bottom-center',
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    });
+  };
+
+  const handleAddToCart = (destination) => {
+    dispatch(
+      addToCart({
+        id: destination.id,
+        title: destination.title,
+        image: destination.imgSrc,
+        price: destination.newPrice,
+      })
+    );
+    showItemAddedToast();
+  };
   return (
     <React.Fragment>
       <Head>
@@ -179,18 +204,7 @@ export default function HomePage() {
                           <p className='text-base sm:text-lg xl:text-base font-bold'>
                             ${destination.newPrice}
                           </p>
-                          <button
-                            onClick={() =>
-                              dispatch(
-                                addToCart({
-                                  id: destination.id,
-                                  title: destination.title,
-                                  image: destination.imgSrc,
-                                  price: destination.newPrice,
-                                })
-                              )
-                            }
-                          >
+                          <button onClick={() => handleAddToCart(destination)}>
                             <LocalMallOutlinedIcon className='text-slate-300' />
                           </button>
                           {/* <LocalMallOutlinedIcon className='text-slate-300' /> */}
@@ -204,6 +218,7 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+      <ToastContainer position='bottom-center' />
     </React.Fragment>
   );
 }

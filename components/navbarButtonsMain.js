@@ -15,7 +15,7 @@ const NavbarButtonsMain = ({ size }) => {
   const open = Boolean(anchorEl);
 
   const [totalItems, setTotalItems] = useState(0);
-  const cart = useSelector((state) => state.cart);
+  const { cart } = useSelector((state) => state.cart);
 
   useEffect(() => {
     console.log('CART:', cart);
