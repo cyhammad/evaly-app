@@ -136,6 +136,11 @@ const CartMenuWeb = ({ open, toggleMenu, anchorEl }) => {
             width="350px"
             maxHeight="400"
           >
+            {cart[0] == undefined ? (
+              <Typography className="text-center text-gray-500 py-24">
+                No items in cart
+              </Typography>
+            ) : null}
             {cart.map((item) => (
               <CartItem
                 id={item.id}
