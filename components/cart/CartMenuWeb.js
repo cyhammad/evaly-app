@@ -138,6 +138,7 @@ const CartMenuWeb = ({ open, toggleMenu, anchorEl }) => {
           >
             {cart.map((item) => (
               <CartItem
+                id={item.id}
                 prod={item.title}
                 price={item.price}
                 quantity={item.quantity}

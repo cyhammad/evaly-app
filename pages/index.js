@@ -8,6 +8,8 @@ import Button from "../components/Button";
 import { Avatar } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/cartSlice";
+import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from "react-toastify";
 const inriaSans = Inria_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "700"],
@@ -97,6 +99,30 @@ const TOUR_DESTINATIONS = [
 
 export default function HomePage() {
   const dispatch = useDispatch();
+  const showItemAddedToast = () => {
+    toast('Item added to cart', {
+      position: "bottom-center",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+  }
+
+  const handleAddToCart = (destination) => {
+    dispatch(
+      addToCart({
+        id: destination.id,
+        title: destination.title,
+        image: destination.imgSrc,
+        price: destination.newPrice,
+      })
+    )
+    showItemAddedToast()
+  }
   return (
     <>
       <Head>
@@ -181,16 +207,8 @@ export default function HomePage() {
                             ${destination.newPrice}
                           </p>
                           <button
-                            onClick={() =>
-                              dispatch(
-                                addToCart({
-                                  id: destination.id,
-                                  title: destination.title,
-                                  image: destination.imgSrc,
-                                  price: destination.newPrice,
-                                })
-                              )
-                            }
+                            onClick={() => handleAddToCart(destination)}
+                            className="hover:bg-[#F5F5F5] p-1 rounded-full"
                           >
                             <LocalMallOutlinedIcon className="text-slate-300" />
                           </button>
@@ -204,6 +222,7 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+      <ToastContainer position="bottom-center" />
     </>
   );
 }

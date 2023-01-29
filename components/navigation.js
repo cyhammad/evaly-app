@@ -444,7 +444,7 @@ const WebNavigation = (props) => {
         <div>
           <EvalyLogo height={25} />
         </div>
-        <div className='relative w-full w-[65%] xl:w-[73%] '>
+        <div className='relative w-[65%] xl:w-[73%] '>
           <div className='flex items-center'>
             <input
               className='w-[100%] py-[7px] rounded-tl-md outline-none rounded-bl-md px-3 border border-black'
