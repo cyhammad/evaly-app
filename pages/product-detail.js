@@ -9,7 +9,7 @@ import { Carousel } from 'react-responsive-carousel';
 export default function ProductDetailPage() {
   return (
     <div
-      className={`${inria_sans.className} px-3 md:px-10 xl:px-12 max-w-7xl mx-auto md:my-4 lg:my-5 my-1 pb-12 md:pb-0`}
+      className={`${inriaSans.className} px-3 md:px-10 xl:px-12 max-w-7xl mx-auto md:my-4 lg:my-5 my-1 pb-12 md:pb-0`}
     >
       <div className='lg:flex shadow rounded-md'>
         {/* Product */}

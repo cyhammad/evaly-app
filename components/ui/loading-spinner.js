@@ -1,9 +1,9 @@
 import { Bars } from 'react-loader-spinner';
-import { Inria_Sans } from '@next/font/google';
+import { inriaSans } from '../utils/getinriaFont';
 
 const LoadingSpinner = (props) => {
   return (
-    <div className={`flex flex-col items-center ${inria_sans.className}`}>
+    <div className={`flex flex-col items-center ${inriaSans.className}`}>
       <Bars
         height='80'
         width='60'

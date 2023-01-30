@@ -56,7 +56,7 @@ export default function ProfilePage() {
       </Head>
       <NoSsr>
         <div
-          className={`${inria_sans.className} px-3 md:px-10 xl:px-12 max-w-7xl mx-auto md:my-4 lg:my-5 my-1 mb-4 flex md:gap-4 pb-14 md:pb-0`}
+          className={`${inriaSans.className} px-3 md:px-10 xl:px-12 max-w-7xl mx-auto md:my-4 lg:my-5 my-1 mb-4 flex md:gap-4 pb-14 md:pb-0`}
         >
           <div className='flex-1 md:max-w-[41%] lg:max-w-[30%]'>
             <div className='w-full md:hidden rounded-md shadow bg-white'>

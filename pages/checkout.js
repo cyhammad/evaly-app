@@ -20,7 +20,7 @@ export default function CheckoutPage() {
         <title>Order Page</title>
       </Head>
       <div
-        className={`${inria_sans.className} flex flex-col-reverse md:flex-row  gap-4 px-3 md:px-10 xl:px-12 max-w-7xl mx-auto md:gap-5 lg:gap-12 md:my-4 lg:my-5 my-1 pb-20 md:pb-0`}
+        className={`${inriaSans.className} flex flex-col-reverse md:flex-row  gap-4 px-3 md:px-10 xl:px-12 max-w-7xl mx-auto md:gap-5 lg:gap-12 md:my-4 lg:my-5 my-1 pb-20 md:pb-0`}
       >
         <div className='flex-1'>
           <h2 className='text-xl font-bold lg:text-2xl pb-2'>Your Order</h2>

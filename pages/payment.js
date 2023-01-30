@@ -31,7 +31,7 @@ export default function PaymentPage() {
         <title>Payment Page</title>
       </Head>
       <div
-        className={`${inria_sans.className} px-3 md:px-10 xl:px-12 max-w-7xl mx-auto flex flex-col-reverse gap-4 md:flex-row md:gap-5 lg:gap-12 md:my-4 lg:my-5 my-1 pb-20 md:pb-0`}
+        className={`${inriaSans.className} px-3 md:px-10 xl:px-12 max-w-7xl mx-auto flex flex-col-reverse gap-4 md:flex-row md:gap-5 lg:gap-12 md:my-4 lg:my-5 my-1 pb-20 md:pb-0`}
       >
         <div className='flex-1'>
           <h2 className='text-xl font-bold lg:text-2xl pb-2'>
@@ -192,7 +192,7 @@ function CustomizedRadios() {
 const PayCard = (props) => {
   return (
     <div
-      className={`${inria_sans.className} flex w-full justify-between items-center border-b-[1px] py-[10px] border-[#ccc]`}
+      className={`${inriaSans.className} flex w-full justify-between items-center border-b-[1px] py-[10px] border-[#ccc]`}
     >
       <div>
         <p>VISA/Master Card</p>
