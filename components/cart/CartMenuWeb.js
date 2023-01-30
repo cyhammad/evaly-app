@@ -154,7 +154,7 @@ const CartMenuWeb = ({ open, toggleMenu, anchorEl }) => {
             ))}
           </Box>
           <div className="px-4 py-4  border-t border-slate-200">
-            <Button onClick={()=>router.push('/order')} className="w-full" color="bg-black" title="Checkout" />
+            <Button onClick={()=>router.push('/order')} disabled={cart[0] == undefined} className="w-full" color="bg-black" title="Checkout" />
           </div>
         </div>
       </Menu>
