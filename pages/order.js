@@ -9,12 +9,13 @@ import {
 } from '../store/cartSlice';
 
 import { inriaSans } from '../components/utils/getinriaFont';
+import { useRouter } from 'next/router';
 
 export default function OrderPage() {
-  const [productQty, setProductQty] = useState(1);
   const [total, setTotal] = useState(0);
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => {
     if (cart.length > 0) {
@@ -24,14 +25,10 @@ export default function OrderPage() {
       });
       setTotal(totalPrice);
     }
-  }, [cart]);
-
-  const decreaseProductQtyHandler = () => {
-    if (productQty > 1) {
-      setProductQty((qty) => qty - 1);
+    else {
+      setTotal(0);
     }
-    return;
-  };
+  }, [cart]);
 
   return (
     <>
@@ -57,7 +54,7 @@ export default function OrderPage() {
                 </div>
                 <div className='w-[60%] px-2 text-sm'>
                   <p className='lg:text-xl'>
-                    Nipun Enterprise for Cash on Delivery Service
+                    Nipun for Cash on Delivery Service
                   </p>
                   <div className='mt-2 font-light lg:text-lg'>
                     <p>* Minimum Order</p>
@@ -67,36 +64,36 @@ export default function OrderPage() {
                   </div>
                 </div>
               </div>
-              {cart.map((item) => (
+              {cart?.map((item) => (
                 <div
-                  key={item.title}
+                  key={item?.title}
                   className='flex mt-3 px-2 py-3 rounded-md'
                 >
                   <div className='w-[80px] flex justify-center items-center shadow py-1 h-[90px] rounded-md'>
                     <Image
                       className='object-contain p-2 w-full h-full'
-                      src={item.image}
+                      src={item?.image}
                       alt={'Enterprise'}
                       width={45}
                       height={45}
                     />
                   </div>
                   <div className='flex-1 pl-3 text-xs lg:px-4'>
-                    <p className='font-bold lg:text-lg'>{item.title}</p>
-                    <p className='font-bold mt-1 lg:text-lg'>${item.price}</p>
+                    <p className='font-bold lg:text-lg'>{item?.title}</p>
+                    <p className='font-bold mt-1 lg:text-lg'>${item?.price}</p>
                     <div className='flex mt-2 justify-between'>
                       <div className='border lg:text-lg border-[#ccc] rounded-md px-2 py-1'>
                         <button
-                          onClick={() => dispatch(decrementQuantity(item.id))}
+                          onClick={() => dispatch(decrementQuantity(item?.id))}
                           className='pr-3'
                         >
                           -
                         </button>
                         <span className='px-5 border-r border-l border-[#ccc]'>
-                          {item.quantity}
+                          {item?.quantity}
                         </span>
                         <button
-                          onClick={() => dispatch(incrementQuantity(item.id))}
+                          onClick={() => dispatch(incrementQuantity(item?.id))}
                           className='pl-3'
                         >
                           +
@@ -104,7 +101,7 @@ export default function OrderPage() {
                       </div>
                       <button
                         className='text-red-500 lg:text-lg'
-                        onClick={() => dispatch(removeItem(item.id))}
+                        onClick={() => dispatch(removeItem(item?.id))}
                       >
                         Remove
                       </button>
@@ -120,10 +117,10 @@ export default function OrderPage() {
           <div className='shadow rounded-md bg-white'>
             <div className='flex px-4 py-5 justify-between'>
               <p className='text-blue-500 text-lg'>
-                Nipun Enterprise for Cash on Delivery Service
+                Nipun for Cash on Delivery Service
               </p>
               <p className='min-w-[80px] text-right text-lg'>
-                $ {7150 * productQty}
+                $ {7150}
               </p>
             </div>
             <hr className='mx-3 border-gray-300' />
@@ -136,7 +133,7 @@ export default function OrderPage() {
               <p className='font-bold text-lg'>$ {total}.00</p>
             </div>
             <div className='mt-4 flex justify-center pb-5'>
-              <button className='bg-black text-white py-3 text-lg rounded-md items-center gap-2 w-[95%]'>
+              <button className='bg-black text-white py-3 text-lg rounded-md items-center gap-2 w-[95%]' onClick={()=>router.push('/checkout')}>
                 Confirm Order
               </button>
             </div>

@@ -1,12 +1,16 @@
-import { inriaSans } from '../components/utils/getinriaFont';
+import { inriaSans } from '../../components/utils/getinriaFont';
 import { BsCheck2Square } from 'react-icons/bs';
 import { IoShareSocialOutline } from 'react-icons/io5';
 import { HiOutlineShoppingCart } from 'react-icons/hi2';
 import { FaPhoneAlt } from 'react-icons/fa';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
+import { useRouter } from 'next/router';
 
 export default function ProductDetailPage() {
+  const router = useRouter();
+  const {id} = router.query;
+  console.log("ID", id);
   return (
     <div
       className={`${inriaSans.className} px-3 md:px-10 xl:px-12 max-w-7xl mx-auto md:my-4 lg:my-5 my-1 pb-12 md:pb-0`}
@@ -98,13 +102,13 @@ export default function ProductDetailPage() {
                 </div>
               </div>
               <div className='mt-3 flex items-center gap-2'>
-                <button className='flex bg-red-700 text-white py-2 rounded-sm items-center gap-2 w-full justify-center'>
+                <button className='flex bg-red-700 text-white py-2 rounded-sm items-center gap-2 w-full justify-center' onClick={()=>router.push('/auth/login')}>
                   <div>
                     <HiOutlineShoppingCart />
                   </div>
                   <p className='lg:text-lg'>Buy now</p>
                 </button>
-                <button className='flex bg-black text-white py-2 rounded-sm items-center gap-2 w-full justify-center'>
+                <button className='flex bg-black text-white py-2 rounded-sm items-center gap-2 w-full justify-center' onClick={()=>router.push('/cart')}>
                   <div>
                     <HiOutlineShoppingCart />
                   </div>
