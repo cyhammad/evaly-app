@@ -7,10 +7,12 @@ import MenuAnchor from "../MenuAnchor";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const CartMenuWeb = ({ open, toggleMenu, anchorEl }) => {
   const cart = useSelector((state) => state.cart);
   const [totalItems, setTotalItems] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     console.log("CART:", cart);
@@ -152,7 +154,7 @@ const CartMenuWeb = ({ open, toggleMenu, anchorEl }) => {
             ))}
           </Box>
           <div className="px-4 py-4  border-t border-slate-200">
-            <Button className="w-full" color="bg-black" title="Checkout" />
+            <Button onClick={()=>router.push('/order')} className="w-full" color="bg-black" title="Checkout" />
           </div>
         </div>
       </Menu>

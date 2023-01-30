@@ -102,7 +102,7 @@ export default function HomePage() {
   const showItemAddedToast = () => {
     toast('Item added to cart', {
       position: "bottom-center",
-      autoClose: 5000,
+      autoClose: 1000,
       hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,

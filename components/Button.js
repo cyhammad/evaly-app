@@ -1,8 +1,9 @@
 import React from 'react';
 
-export default function Button({ icon, title, color, className }) {
+export default function Button({ icon, title, color, className, onClick }) {
   return (
     <button
+      onClick={onClick}
       type='button'
       className={`${className} appButton flex items-center ${
         icon ? 'justify-between' : 'justify-center'
