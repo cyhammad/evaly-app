@@ -3,14 +3,9 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { Inria_Sans } from '@next/font/google';
+import { inriaSans } from './utils/getinriaFont';
 import Image from 'next/image';
 import CallMadeIcon from '@mui/icons-material/CallMade';
-
-const inriaSans = Inria_Sans({
-  subsets: ['latin'],
-  weight: ['300', '400', '700'],
-});
 
 function SearchBar(props) {
   const { onClose } = props;

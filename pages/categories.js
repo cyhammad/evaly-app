@@ -2,10 +2,6 @@ import { Inria_Sans } from "@next/font/google";
 import Image from "next/image";
 import { useState } from "react";
 
-const inriaSans = Inria_Sans({
-    subsets: ["latin"],
-    weight: ["300", "400", "700"],
-});
 
 const CatergoriesPage = (props) => {
     const [activeTab, setActiveTab] = useState("SubCategories");

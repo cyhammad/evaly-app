@@ -1,4 +1,3 @@
-import { Inria_Sans } from '@next/font/google';
 import React, { Component, useState, useRef, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import PhoneInTalkOutlinedIcon from '@mui/icons-material/PhoneInTalkOutlined';
@@ -23,7 +22,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
 import { EvalyLogo } from './icons/logo';
-
+import { inriaSans } from './utils/getinriaFont';
 import {
   Divider,
   Drawer,
@@ -38,15 +37,12 @@ import {
 import CategoriesMenu from './common/CategoriesMenu';
 import MenuButton from './common/MenuButton';
 
-const inriaSans = Inria_Sans({
-  subsets: ['latin'],
-  weight: ['300', '400', '700'],
-});
-
 import SearchBar from './search-bar';
 import NavbarButtonsMain from './navbarButtonsMain';
 import CartMenuWeb from './cart/CartMenuWeb';
 
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 const Navigation = (props) => {
   return (
     <nav className={inriaSans.className}>
@@ -332,21 +328,24 @@ const WebNavigation = (props) => {
   const [toggleSearch, setToggleSearch] = useState(false);
   const [visible, setVisible] = useState(false);
   const open = Boolean(anchorEl);
+  const router = useRouter();
 
   const ref = useRef(null);
 
   useEffect(() => {
-    function handleScroll() {
-      if (window.scrollY > 500) {
-        setVisible(true);
-      } else {
-        setVisible(false);
+    if (router.pathname == '/') {
+      setVisible(false);
+      function handleScroll() {
+        if (window.scrollY > 500) {
+          setVisible(true);
+        } else {
+          setVisible(false);
+        }
       }
-    }
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    } else setVisible(true);
+  }, [router.pathname]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);

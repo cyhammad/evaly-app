@@ -10,12 +10,7 @@ import FileCopyIcon from '@mui/icons-material/FileCopy';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 
-import { Inria_Sans } from '@next/font/google';
-
-const inriaSans = Inria_Sans({
-  subsets: ['latin'],
-  weight: ['300', '400', '700'],
-});
+import { inriaSans } from '../utils/getinriaFont';
 
 const StyledMenu = styled((props) => (
   <Menu

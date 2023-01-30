@@ -10,27 +10,28 @@ import EmojiEventsOutlinedIcon from '@mui/icons-material/EmojiEventsOutlined';
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
 
-import { Inria_Sans } from '@next/font/google';
 import { Badge, styled } from '@mui/material';
+import { inriaSans } from '../utils/getinriaFont';
+import { Icon } from '@iconify/react';
 
-const inriaSans = Inria_Sans({
-  subsets: ['latin'],
-  weight: ['300', '400', '700'],
-});
+import shoppingBag from '@iconify/icons-lucide/shopping-bag';
+import userIcon from '@iconify/icons-lucide/user';
+import bellIcon from '@iconify/icons-lucide/bell';
+import messageSquare from '@iconify/icons-lucide/message-square';
 
 export default function SimpleBottomNavigation() {
   const [value, setValue] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
-  const cart = useSelector((state) => state.cart);
+  const { cart } = useSelector((state) => state.cart);
 
   useEffect(() => {
-    console.log('CART:', cart);
-    let total = 0;
-    cart.length > 0 &&
+    if (cart.length > 0) {
+      let total = 0;
       cart.forEach((item) => {
         total += item.quantity;
       });
-    setTotalItems(total);
+      setTotalItems(total);
+    }
   }, [cart]);
 
   return (
@@ -45,12 +46,31 @@ export default function SimpleBottomNavigation() {
           }}
         >
           <BottomNavigationAction
-            label={<p className={inriaSans.className}>Home</p>}
-            icon={<HouseOutlinedIcon />}
+            label={<p className={inriaSans.className}>Cart</p>}
+            icon={
+              <BadgeExt
+                badgeContent={totalItems.toString()}
+                badgeColor='#b91c1c'
+              >
+                <Icon
+                  icon={shoppingBag}
+                  width={22}
+                  height={22}
+                  color='inherit'
+                />
+              </BadgeExt>
+            }
           />
           <BottomNavigationAction
-            label={<p className={inriaSans.className}>Campaigns</p>}
-            icon={<EmojiEventsOutlinedIcon />}
+            label={<p className={inriaSans.className}>Messages</p>}
+            icon={
+              <Icon
+                icon={messageSquare}
+                width={22}
+                height={22}
+                color='inherit'
+              />
+            }
           />
           <BottomNavigationAction
             sx={{
@@ -61,19 +81,16 @@ export default function SimpleBottomNavigation() {
             icon={<Logo />}
           />
           <BottomNavigationAction
-            label={<p className={inriaSans.className}>Cart</p>}
+            label={<p className={inriaSans.className}>Notifications</p>}
             icon={
-              <BadgeExt
-                badgeContent={totalItems.toString()}
-                badgeColor='#b91c1c'
-              >
-                <ShoppingCartIcon />
-              </BadgeExt>
+              <Icon icon={bellIcon} width={22} height={22} color='inherit' />
             }
           />
           <BottomNavigationAction
             label={<p className={inriaSans.className}>Account</p>}
-            icon={<AccountCircleOutlinedIcon />}
+            icon={
+              <Icon icon={userIcon} width={22} height={22} color='inherit' />
+            }
           />
         </BottomNavigation>
       </Box>

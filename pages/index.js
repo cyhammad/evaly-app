@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { Inria_Sans } from '@next/font/google';
 import { HeroBannerSlider } from '../components';
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
@@ -100,7 +99,7 @@ export default function HomePage() {
   const showItemAddedToast = () => {
     toast('Item added to cart', {
       position: 'bottom-center',
-      autoClose: 5000,
+      autoClose: 1000,
       hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,

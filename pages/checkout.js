@@ -1,13 +1,8 @@
-import { Inria_Sans } from '@next/font/google';
+import { inriaSans } from '../components/utils/getinriaFont';
 import Head from 'next/head';
 import { useState } from 'react';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { BiArrowBack } from 'react-icons/bi';
-
-const inria_sans = Inria_Sans({
-  subsets: ['latin'],
-  weight: ['300', '400', '700'],
-});
 
 const addressesList = [
   { id: 0, name: 'Manfouha Dist, Riyadh' },

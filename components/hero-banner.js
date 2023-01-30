@@ -3,12 +3,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Image from 'next/image';
-import { Inria_Sans } from '@next/font/google';
-
-const inria_sans = Inria_Sans({
-  subsets: ['latin'],
-  weight: ['300', '400', '700'],
-});
+import { inriaSans } from './utils/getinriaFont';
 
 import { Box, MenuItem, MenuList, Paper, styled } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -291,7 +286,7 @@ export default function BannerSlider() {
                             }}
                           >
                             <div
-                              className={`${inria_sans.className} flex items-center justify-between w-full`}
+                              className={`${inriaSans.className} flex items-center justify-between w-full`}
                             >
                               <p>{item}</p>
                               <KeyboardArrowRightIcon
