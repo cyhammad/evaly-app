@@ -102,7 +102,7 @@ export default function ProductDetailPage() {
                 </div>
               </div>
               <div className='mt-3 flex items-center gap-2'>
-                <button className='flex bg-red-700 text-white py-2 rounded-sm items-center gap-2 w-full justify-center' onClick={()=>router.push('/auth/login')}>
+                <button className='flex bg-red-700 text-white py-2 rounded-sm items-center gap-2 w-full justify-center' onClick={()=>router.push('/auth/signin')}>
                   <div>
                     <HiOutlineShoppingCart />
                   </div>
